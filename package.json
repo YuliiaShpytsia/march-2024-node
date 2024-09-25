@@ -1,16 +1,32 @@
 {
-  "name": "march-2024-node",
-  "version": "0.0.0",
-  "private": true,
+  "name": "march-2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node ./bin/www"
+    "start:dev": "rimraf dist && tsc-watch --onSuccess \"npm run watch:server\"",
+    "watch:server": "nodemon --exec ts-node src/index.ts",
+    "start": "node ./dist/main.js",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "prepare": "husky"
   },
+  "private": true,
   "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "nodemon": "^3.1.7",
+    "pug": "2.0.0-beta11",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "tsc-node": "^0.0.3",
+    "tsc-watch": "^6.2.0"
   }
 }

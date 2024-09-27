@@ -1,21 +1,22 @@
-import express, {Request, Response, NextFunction} from "express";
-import {read} from "./fs.service";
+import express, { Request, Response } from "express";
+
+import { read } from "./fs.service";
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/users', async (req: Request, res: Response, next: NextFunction) =>{
-    try{
-        const users = await read();
-        res.send(users);
-    } catch (e) {
-        res.status(500).send(e.message);
-    }
+app.get("/users", async (req: Request, res: Response) => {
+  try {
+    const users = await read();
+    res.send(users);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
 });
 
-// app.post('/users', async (req: Request, res: Response, next: NextFunction) => {
+// app.post('/users', async (req: Request, res: Response) => {
 //     try{
 //         const {name, email, password} = req.body;
 //         if (!name || name.length < 3) {
@@ -39,7 +40,7 @@ app.get('/users', async (req: Request, res: Response, next: NextFunction) =>{
 //     }
 // });
 //
-// app.get('/users/:userId', async (req: Request, res: Response, next: NextFunction) => {
+// app.get('/users/:userId', async (req: Request, res: Response) => {
 //     try {
 //         const userId = Number(req.params.userId);
 //         const users = await read()
@@ -53,7 +54,7 @@ app.get('/users', async (req: Request, res: Response, next: NextFunction) =>{
 //     }
 // });
 //
-// app.put('/users/:userId', async (req: Request, res: Response, next: NextFunction) => {
+// app.put('/users/:userId', async (req: Request, res: Response) => {
 //     try {
 //         const userId = Number(req.params.userId);
 //         const {name, email, password} = req.body;
@@ -84,7 +85,7 @@ app.get('/users', async (req: Request, res: Response, next: NextFunction) =>{
 //     }
 // });
 //
-// app.delete('/users/:userId', async (req: Request, res: Response, next: NextFunction) => {
+// app.delete('/users/:userId', async (req: Request, res: Response) => {
 //     try {
 //         const userId = Number(req.params.userId);
 //         const users = await read()
@@ -101,5 +102,5 @@ app.get('/users', async (req: Request, res: Response, next: NextFunction) =>{
 // });
 
 app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+  console.log("Server is running on http://localhost:3000");
 });

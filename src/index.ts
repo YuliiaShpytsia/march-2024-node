@@ -1,5 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
+import * as mongoose from "mongoose";
 
+import { configs } from "./config/configs";
 import { ApiError } from "./errors/api-error";
 import { userRouter } from "./routes/user.router";
 
@@ -22,6 +24,9 @@ process.on("uncaughtException", (error) => {
   process.exit(1);
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+app.listen(configs.APP_PORT, async () => {
+  await mongoose.connect(configs.MONGO_URI);
+  console.log(
+    `Server is running on http://${configs.APP_HOST}:${configs.APP_PORT}`,
+  );
 });

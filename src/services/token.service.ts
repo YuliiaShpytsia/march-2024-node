@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import * as jsonwebtoken from "jsonwebtoken";
 
 import { configs } from "../config/configs";
@@ -24,13 +23,13 @@ class TokenService {
       let secret: string;
 
       switch (type) {
-      case TokenTypeEnum.ACCESS:
-        secret = configs.JWT_ACCESS_SECRET;
-        break;
+        case TokenTypeEnum.ACCESS:
+          secret = configs.JWT_ACCESS_SECRET;
+          break;
 
-      case TokenTypeEnum.REFRESH:
-        secret = configs.JWT_REFRESH_SECRET;
-        break;
+        case TokenTypeEnum.REFRESH:
+          secret = configs.JWT_REFRESH_SECRET;
+          break;
       }
       return jsonwebtoken.verify(token, secret) as ITokenPayload;
     } catch (e) {

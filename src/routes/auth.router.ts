@@ -12,11 +12,7 @@ router.post(
   commonMiddleware.isBodyValid(UserValidator.create),
   authController.signUp,
 );
-router.post(
-  "/sign-in",
-  // commonMiddleware.isBodyValid(UserValidator.signIn),
-  authController.signIn,
-);
+router.post("/sign-in", authController.signIn);
 
 router.post(
   "/refresh",

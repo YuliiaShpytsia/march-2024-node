@@ -85,17 +85,25 @@ class AuthService {
   ): Promise<void> {
     const user = await userRepository.getById(jwtPayload.userId);
     await tokenRepository.deleteOneByParams({ _id: tokenId });
-    await emailService.sendMail(EmailTypeEnum.LOGOUT, "feden2906@gmail.com", {
-      name: user.name,
-    });
+    await emailService.sendMail(
+      EmailTypeEnum.LOGOUT,
+      "yulia93shpiza@gmail.com",
+      {
+        name: user.name,
+      },
+    );
   }
 
   public async logoutAll(jwtPayload: ITokenPayload): Promise<void> {
     const user = await userRepository.getById(jwtPayload.userId);
     await tokenRepository.deleteManyByParams({ _userId: jwtPayload.userId });
-    await emailService.sendMail(EmailTypeEnum.LOGOUT, user.email, {
-      name: user.name,
-    });
+    await emailService.sendMail(
+      EmailTypeEnum.LOGOUT,
+      "yulia93shpiza@gmail.com",
+      {
+        name: user.name,
+      },
+    );
   }
 
   public async forgotPasswordSendEmail(dto: IResetPasswordSend): Promise<void> {
@@ -112,11 +120,15 @@ class AuthService {
       _userId: user._id,
       token,
     });
-    await emailService.sendMail(EmailTypeEnum.FORGOT_PASSWORD, user.email, {
-      name: user.name,
-      email: user.email,
-      actionToken: token,
-    });
+    await emailService.sendMail(
+      EmailTypeEnum.FORGOT_PASSWORD,
+      "yulia93shpiza@gmail.com",
+      {
+        name: user.name,
+        email: user.email,
+        actionToken: token,
+      },
+    );
   }
 
   public async forgotPasswordSet(

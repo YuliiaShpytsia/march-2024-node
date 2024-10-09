@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
+import { ActionTokenTypeEnum } from "../enums/action-token-type.enum";
 import { TokenTypeEnum } from "../enums/token-type.enum";
 import { ApiError } from "../errors/api-error";
 import { IResetPasswordSet } from "../interfaces/user.interface";
@@ -71,7 +72,10 @@ class AuthMiddleware {
   ) {
     try {
       const { token } = req.body as IResetPasswordSet;
-      const payload = tokenService.verifyToken(token, TokenTypeEnum.ACCESS);
+      const payload = tokenService.verifyToken(
+        token,
+        ActionTokenTypeEnum.FORGOT_PASSWORD,
+      );
       const tokenEntity = await actionTokenRepository.getByToken(token);
       if (!tokenEntity) {
         throw new ApiError("Token is not valid", 401);

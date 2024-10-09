@@ -72,7 +72,6 @@ class AuthController {
   ) {
     try {
       const dto = req.body as IResetPasswordSend;
-
       await authService.forgotPasswordSendEmail(dto);
       res.sendStatus(204);
     } catch (e) {

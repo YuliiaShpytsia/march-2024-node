@@ -96,9 +96,13 @@ class AuthService {
   ): Promise<void> {
     const user = await userRepository.getById(jwtPayload.userId);
     await tokenRepository.deleteOneByParams({ _id: tokenId });
-    await emailService.sendMail(EmailTypeEnum.LOGOUT, "feden2906@gmail.com", {
-      name: user.name,
-    });
+    await emailService.sendMail(
+      EmailTypeEnum.LOGOUT,
+      "yulia93shiza@gmail.com",
+      {
+        name: user.name,
+      },
+    );
   }
 
   public async logoutAll(jwtPayload: ITokenPayload): Promise<void> {
